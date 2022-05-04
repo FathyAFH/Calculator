@@ -1,0 +1,50 @@
+#include "std_lib_facilities.h"
+
+void swap_v(int a, int b) /*swapping integers by values*/
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+void swap_r(int& a, int& b) /*swapping integers by reference (variables are assigned to new values after function)*/
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+/*
+void swap_cr(const int& a, const int& b)  - The function would not be valid as the integers cannot be constant and int& at the same because int& assigns the variable to a new value after the function is finished
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+*/
+
+int main()
+{
+    int x = 7;
+    int y = 9;
+    swap_r(x, y); /* values are swapped and new values to each variable are assigned. x is 9 and y is 7 according to swapping by reference int&*/
+    swap_v(7, 9); /*values are swapped but no assignment would occur, if we used swap_r, an error would occur because values cannot be assigned to new values because they are already values */
+    const int cx = 7; 
+    const int cy = 9;
+    /* swap_r(cx, cy);  we cannot swap constant integers together as they cannot change */
+    swap_v(7.7, 9.9);
+    double dx = 7.7;
+    double dy = 9.9;
+    /*swap_r(dx, dy);  it is not possible to swap double variables/values in an integer assigned function
+    swap_r(7.7, 9.9);*/
+
+    cout << "x: " << x << '\n'
+         << "y: " << y << '\n'
+         << "cx: " << cx << '\n'
+         << "cy: " << cy << '\n'
+         << "dx: " << dx << '\n'
+         << "dy: " << dy << '\n';
+}
