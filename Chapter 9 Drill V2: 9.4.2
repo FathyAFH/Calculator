@@ -1,0 +1,69 @@
+////////////////////////////////////////////////////////////////////////Version 9.4.2/////////////////////////////////////////////////////////////////////
+#include "std_lib_facilities.h"
+
+struct Date {
+	int year, month, day;
+	Date(int y, int m, int d); //the date has to be written in YYYY.MM.DD exactly, it will give an error if the order changes
+	void add_day(int n); // DECLARATION for the function add_day() to update the date when we add days
+};
+
+Date::Date(int y, int m, int d)
+{
+	if (y > 0)
+		year = y;
+	else
+		error("Invalid year");
+	if (m < 13 && m > 0)
+		month = m;
+	else
+		error("Invalid month");
+	if (d > 0 && d < 32)
+		day = d;
+	else
+		error("Invalid day");
+}
+
+void Date::add_day(int n)
+{
+	day += n;
+	if (day > 31)
+	{
+		month++;
+		day -= 31;
+		if (month > 12)
+		{
+			year++;
+			month -= 12;
+		}
+	}
+}
+
+int main()
+try {
+
+
+	//Date some_day {12, 24, 2018}; //Runtime error
+
+
+    Date today {1978, 6, 25};
+
+    cout << "Date: " << today.year << ". " << today.month << ". " << today.day << endl;
+
+    Date tomorrow = today;
+    tomorrow.add_day(1);
+
+    cout << "Tomorrow: " << tomorrow.year << ". " << tomorrow.month << ". " << tomorrow.day << endl;
+
+    Date birth_date {2002, 12, 31};
+    birth_date.month++; //birthdate.day++; In this case, the value will be incremented to 13 for month and 32 for day but no error would occur because we didnt use the function add_day()
+    cout << "Birthdate: " << birth_date.year << ". " << birth_date.month << ". " << birth_date.day << endl;
+
+    Date invalid_day {2004, 11, 34};
+
+	return 0;
+
+} catch (exception& e) {
+	cout << "Error: " << e.what() << endl; // catch function is used to find the error in the code and print an error message instead of giving an actual error and preventing the code from compiling
+	return 1;
+}
+
