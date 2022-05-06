@@ -1,3 +1,4 @@
+
 //////////////////////////////////////////////////////////////////////////////version 9.4.3//////////////////////////////////////////////////////////////////
 
 #include "std_lib_facilities.h"
@@ -70,91 +71,6 @@ catch(exception& e)
 }
 catch(...)
 {
-    cerr << "unknown error" << '\n';
-    return 2;
-}
-
-//Version 9.7.1
-
-#include "std_lib_facilities.h"
-enum class Month {
-    jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec  // enumeration class is basically a user defined class that includes a limited number of constants which means for the year it has only 12 months and only the mentioned months, we cannot have a month for example called joe as it doesnt exist
-};
-
-vector<string> month_tbl = { "January", "February", "March", "April",
-                             "May", "June", "July", "August", "September",
-                             "October", "November", "December" }; //vector that stores the months of the year in order (table so the first element is 1 which is january)
-
-ostream& operator<<(ostream& os, Month m)
-{
-    return os << month_tbl[int(m)]; // displays the month when declared. for ex when we write jan, it will print January
-}
-
-class Date {
-    int y;
-    Month m; // the format is yyyy.mm.dd with m as a string
-    int d;
-public:
-    Date(int y, Month m, int d);
-    void add_day(int n);
-    int year() const { return y; }
-    Month month() const { return m; }
-    int day() const { return d; }
-};
-
-
-Date::Date(int yy, Month mm, int dd)
-    :y{yy}, m{mm}, d{dd}
-{
-    if (d < 1 || 31 < d) error("impossible day");
-}
-   Month operator++(Month& m)
-{
-	m = (m==Month::dec) ? Month::jan : Month(int(m)+1); //This operator will increase the month by one when we ++m
-	return m;
-}
-void Date::add_day(int n)
-{
-    d += n;
-    if (d > 31)
-    {
-        d %= 31;
-        ++m;
-    }
-        if (m==Month::jan) //if the month is jan, this means that the year is new so we add y by one as it will be a new year
-            y++;
-}
-
-
-ostream& operator<<(ostream& os, const Date& d)
-{
-    return os << d.year()
-              << '.' << d.month()
-              << '.' << d.day();
-}
-
-int main()
-try {
-    Date today(1978, Month::jun, 25);
-    Date tomorrow = today;
-    tomorrow.add_day(1);
-
-    cout << "Today : " << today << '\n'
-         << "Tomorrow: " << tomorrow << '\n';
-
-    Date new_year_eve(2021, Month::dec, 31);
-    Date new_year = new_year_eve;
-    new_year.add_day(1);
-    cout << "New year's Eve: " << new_year_eve << endl << "New Year: " << new_year << endl;
-
-
-    //Date bad_day(2004, Month::jul, -5);
-}
-catch(exception& e) {
-    cerr << e.what() << '\n';
-    return 1;
-}
-catch(...) {
     cerr << "unknown error" << '\n';
     return 2;
 }
