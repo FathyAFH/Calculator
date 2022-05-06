@@ -1,0 +1,78 @@
+#include "std_lib_facilities.h"
+
+ostream& print_array10(ostream& os, int* a)
+{
+    for(int i = 0; i < 10; i++)
+    {
+        os << a[i] << endl;
+    }
+    return os;
+}
+
+ostream& print_array11(ostream& os, int* a)
+{
+    for(int i = 0; i < 11; i++)
+    {
+        os << a[i] << endl;
+    }
+    return os;
+}
+
+ostream& print_array(ostream& os, int* a, int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        os << a[i] << endl;
+    }
+    return os;
+}
+
+ostream& print_vector10(ostream& os,vector<int>& v)
+{
+    for(int i = 0; i < 10; i++)
+    {
+        os << v[i] << endl;
+    }
+    return os;
+}
+
+int main()
+{
+    int y = 0;
+    int size = 10;
+    int* arr10 = new int[size];
+    int* arr11 = new int[11];
+    for(int i = 0; i < size; i++)
+    {
+        arr10[i] = i;
+    }
+    cout << "array10" << endl;
+    print_array10(cout, arr10);
+
+    delete[] arr10;
+
+    for(int i = 0; i < size; i++)
+    {
+        arr10[i] = i + 100;
+    }
+    cout << "array100" << endl;
+    print_array10(cout, arr10);
+
+    for(int i = 0; i < 11; i++)
+    {
+        arr11[i] = i;
+    }
+    cout << "array11" << endl;
+    print_array11(cout, arr11);
+
+    vector<int> vec10(10);
+    for(int& v:vec10)
+    {
+        v = y;
+        y++;
+    }
+    cout << "vector10" << endl;
+    print_vector10 (cout, vec10);
+
+    return 0;
+}
