@@ -1,0 +1,57 @@
+#include "std_lib_facilities.h"
+
+template<typename C>
+void print_contents(const C& c)
+{
+    cout<< "Contents: ";
+    for (auto& a : c)
+        cout << a << ' ';
+    cout << '\n';
+}
+template<typename C>
+void print_contents(const C& c,int n)
+{
+    cout<< "Contents: ";
+    for (auto& a : c)
+        cout << a+n << ' ';
+    cout << '\n';
+}
+template<typename Iter1, typename Iter2>
+    // requires Input_iterator<Iter1>() && Output_iterator<Iter2>()
+void my_copy(Iter1 f1, Iter1 e1, Iter2 f2)
+{
+    for (Iter1 p = f1; p != e1; ++p)
+        *f2++ = *p;
+}
+int main()
+{
+    array<int,10> arr={0,1,2,3,4,5,6,7,8,9};
+    vector<int> vec ={0,1,2,3,4,5,6,7,8,9};
+    list<int> li = {0,1,2,3,4,5,6,7,8,9};
+
+    array<int,10> arr_copy = arr;
+    vector<int> vec_copy = vec;
+    list<int> li_copy= li;
+
+    print_contents(li);
+    print_contents(li,2);
+
+    my_copy(arr.begin(),arr.end(),vec_copy.begin());
+    print_contents(vec_copy);
+
+
+     vector<int>::iterator vit;
+    vit = find(vec_copy.begin(), vec_copy.end(), 3);
+    if (vit != vec_copy.end())
+        std::cout << "Found at: " << std::distance(vec_copy.begin(), vit) << '\n';
+    else
+        std::cout << "Not found..\n";
+
+
+    list<int>::iterator lit;
+    lit = find(li_copy.begin(), li_copy.end(), 27);
+    if (lit != li_copy.end())
+        cout << "Found at: " << distance(li_copy.begin(), lit) << '\n';
+    else
+        cout << "Not found..\n";
+}
