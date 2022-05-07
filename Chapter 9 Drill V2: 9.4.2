@@ -55,7 +55,7 @@ try {
     cout << "Tomorrow: " << tomorrow.year << ". " << tomorrow.month << ". " << tomorrow.day << endl;
 
     Date birth_date {2002, 12, 31};
-    birth_date.month++; //birthdate.day++; In this case, the value will be incremented to 13 for month and 32 for day but no error would occur because we didnt use the function add_day()
+    birth_date.month++; birth_date.day++; //In this case, the value will be incremented to 13 for month and 32 for day but no error would occur because we didnt use the function add_day()
     cout << "Birthdate: " << birth_date.year << ". " << birth_date.month << ". " << birth_date.day << endl;
 
     Date invalid_day {2004, 11, 34};
