@@ -42,6 +42,10 @@ Date::Date(int yy, Month mm, int dd)
 void Date::add_day(int n)
 {
     d += n;
+    if(d>29 && m == Month::feb){
+        d%=29;
+        ++m;
+    }
     if (d > 31)
     {
         d %= 31;
@@ -50,7 +54,7 @@ void Date::add_day(int n)
         if (m==Month::jan) //if the month is jan, this means that the year is new so we add y by one as it will be a new year
             y++;
 }
-void Date::add_month(int n) 
+void Date::add_month(int n)
 {
 	int nextM = 0;
 	if ((nextM = int(m) + n) > 12)  //int(m) indicates number of month, so if int(1) then this is january, if nextM = 12+1 = 13, then we return the month to jan and increase the year by 1
@@ -96,6 +100,12 @@ try {
     Date new_year = new_year_eve;
     new_year.add_day(1);
     cout << "New year's Eve: " << new_year_eve << endl << "New Year: " << new_year << endl;
+
+    Date febr (2022,Month::feb,29);
+    cout << "\nEnd of feb: " << febr << endl;
+
+    febr.add_day(1);
+    cout << "First of March: " << febr << endl;
 
 
     //Date bad_day(2004, Month::jul, -5);
